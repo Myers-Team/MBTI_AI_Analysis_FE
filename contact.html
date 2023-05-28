@@ -28,7 +28,7 @@
 
 							<!-- Content -->
 								<div class="content">
-									<form>
+									<form id="SignForm" action="/user/signin" method="POST">
 										<div class="row gtr-50">
 											<div class="col-6 col-12-mobile">
 												<input type="text" name="email" placeholder="Email" />
@@ -41,14 +41,11 @@
 													<li><input type="submit" class="special" value="로그인" /></li>
 												</ul>
 											</div>
-											<div class="col-12">
-												<ul class="buttons">
-													<li><input type="submit" class="special" value="로그인" /></li>
-												</ul>
-											</div>
 										</div>
 									</form>
 								</div>
+									<li style="list-style: none;"><a href="signup.html">회원가입</a></li>
+
 
 						</section>
 
@@ -74,6 +71,46 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+
+			<script>
+				document.getElementById("SigninForm").addEventListener("submit", function(event) {
+				  event.preventDefault();
+				  const email = document.getElementById("email").value;
+				  const password = document.getElementById("password").value;
+			
+				  const loginData = {
+					email: email,
+					password: password
+				  };
+			
+				  fetch('https://api.example.com/user/signin', {
+					method: 'POST',
+					headers: {
+					  'Content-Type': 'application/json'
+					},
+					body: JSON.stringify(SigninData)
+				  })
+				  .then(response => response.json())
+				  .then(data => {
+					if (data.user_id) {
+					  // Signin successful
+					  alert('User Signin successful!');
+					  console.log('사용자 ID:', data.user_id);
+					  console.log('이메일:', data.email);
+					  console.log('닉네임:', data.nickname);
+					  // Redirect to another page or perform other actions
+					  // window.location.href = 'dashboard.html';
+					} else {
+					  // Signin failed
+					  alert('User Signin failed.');
+					}
+				  })
+				  .catch(error => {
+					console.error('An error occurred during user Signin:', error);
+					alert('An error occurred during user Signin. Please try again later.');
+				  });
+				});
+			  </script>
 
 	</body>
 </html>
