@@ -20,7 +20,7 @@
 
 					<header class="special container">
 						<span class="icon solid fa-check"></span>
-						<h2>로그인</h2>
+						<h2>회원가입</h2>
 					</header>
 
 					<!-- One -->
@@ -28,7 +28,7 @@
 
 							<!-- Content -->
 								<div class="content">
-									<form id="SigninForm" action="/user/signin" method="POST">
+									<form id="SignupForm" action="/user/signup" method="POST">
 										<div class="row gtr-50">
 											<div class="col-6 col-12-mobile">
 												<input type="text" name="email" placeholder="Email" />
@@ -37,14 +37,16 @@
 												<input type="text" name="password" placeholder="Password" />
 											</div>
 											<div class="col-12">
+												<input type="text" name="nickname" placeholder="Username" />
+											</div>
+											<div class="col-12">
 												<ul class="buttons">
-													<li><input type="submit" class="special" value="로그인" /></li>
+													<li><input type="submit" class="special" value="회원가입" /></li>
 												</ul>
 											</div>
 										</div>
 									</form>
 								</div>
-									<li style="list-style: none;"><a href="signup.html">회원가입</a></li>
 
 
 						</section>
@@ -73,44 +75,47 @@
 			<script src="assets/js/main.js"></script>
 
 			<script>
-				document.getElementById("SigninForm").addEventListener("submit", function(event) {
+				document.getElementById("SignupForm").addEventListener("submit", function(event) {
 				  event.preventDefault();
 				  const email = document.getElementsByName("email")[0].value;
 				  const password = document.getElementsByName("password")[0].value;
-			
-				  const signinData = {
+				  const nickname = document.getElementsByName("nickname")[0].value;
+			  
+				  const SignupData = {
 					email: email,
-					password: password
+					password: password,
+					nickname: nickname,
 				  };
-			
-				  fetch('/user/signin', {
+			  
+				  fetch('/user/signup', {
 					method: 'POST',
 					headers: {
 					  'Content-Type': 'application/json'
 					},
-					body: JSON.stringify(signinData)
+					body: JSON.stringify(SignupData)
 				  })
 				  .then(response => response.json())
 				  .then(data => {
 					if (data.user_id) {
-					  // Signin successful
-					  alert('User Signin successful!');
+					  // Signup successful
+					  alert('User Signup successful!');
+					  console.log('사용자 ID:', data.user_id);
 					  console.log('이메일:', data.email);
 					  console.log('닉네임:', data.nickname);
-					  // Redirect to another page or perform other actions
-					  window.location.href = "/index2.html";
-
+					  // Redirect to another page
+					  window.location.href = "/contact.html";
 					} else {
-					  // Signin failed
-					  alert('User Signin failed.');
+					  // Signup failed
+					  alert('User Signup failed.');
 					}
 				  })
 				  .catch(error => {
-					console.error('An error occurred during user Signin:', error);
-					alert('An error occurred during user Signin. Please try again later.');
+					console.error('An error occurred during user Signup:', error);
+					alert('An error occurred during user Signup. Please try again later.');
 				  });
 				});
 			  </script>
+			  
 
 	</body>
 </html>

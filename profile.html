@@ -52,8 +52,8 @@
 								<header>
 									<h3 id="user-name"></h3>
 								</header>
-								<p>MBTI : <span id="user-mbti"></span><br />
-									이상형 MBTI : <span id="user-idealmbti"></span>
+								<p>MBTI: <span id="user-mbti"></span><br />
+									이상형 MBTI: <span id="user-idealmbti"></span>
 								</p>
 							</section>
 						</div>
@@ -95,7 +95,7 @@
 	$(document).ready(function() {
 		// AJAX request to fetch user profile
 		$.ajax({
-		  url: '/user/profile', // Replace with the actual backend endpoint for fetching user profile
+		  url: 'http://localhost:3000/user/profile', // Replace with the actual backend endpoint for fetching user profile
 		  method: 'GET',
 		  success: function(response) {
 			// Handle the response from the backend
@@ -104,8 +104,8 @@
 			// Update HTML elements with the user profile data
 			$('#user-name').text(user.name);
 			$('#profile-image').attr('src', user.profileImage);
-			$('#user-mbit').text(user.mbti);
-			$('#user-idealmbit').text(user.idealmbti);
+			$('#user-mbti').text(user.mbti);
+			$('#user-idealmbti').text(user.idealmbti);
 
 			const questionAnswers = response.question;
 			updateQuestionAnswers('#question-answers', questionAnswers); // Call the function to update the HTML
@@ -117,6 +117,7 @@
 		  }
 		});
 	  });
+
 	  function updateQuestionAnswers(elementId, questions) {
 		const questionAnswersElement = $(elementId);
 		for (let i = 0; i < questions.length; i++) {
@@ -126,7 +127,7 @@
 			questionAnswersElement.append(questionHtml);
 		}
 	}
-	  </script>
-	  
+	</script>
+  
 </body>
 </html>

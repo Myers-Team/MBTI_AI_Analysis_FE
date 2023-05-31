@@ -1,0 +1,105 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>MBTI WEBSTIE-mbtiresult</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="contact is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<header id="header">
+					<h1 id="logo"><a href="index2.html">MBTI <span>WEBSITE</span></a></h1>
+					<nav id="nav">
+						<ul>
+							<li class="submenu">
+								<a href="#">Layouts</a>
+								<ul>
+									<li><a href="statistic.html">통계</a></li>
+									<li><a href="recommend.html">컨텐츠추천</a></li>
+									<li><a href="profile.html">회원정보</a></li>
+								</ul>
+							</li>
+							<li><a href="index.html" class="button primary">로그아웃</a></li>
+						</ul>
+					</nav>
+				</header>
+
+			<!-- Main -->
+				<article id="main">
+
+					<!-- One -->
+						<section class="wrapper style4 special container medium">
+							<p><strong>MBTI 결과</strong></p>
+							<!-- Content -->
+							<div class="content">
+								<form>
+									<div class="row gtr-50">
+										<div class="col-12">
+											
+											<p style="font-size:42px" id ="mbti-result"></p>
+											<ul class="buttons">
+												<li><a href="index2.html" class="button">메인페이지로 이동</a></li>
+											</ul>
+										</div>
+									</div>
+								</form>
+							</div>
+
+						</section>
+
+				</article>
+				<!-- Footer -->
+			<section id="footer">
+				<div class="container">
+					<ul class="copyright">
+						<li>&copy; Untitled. All rights reserved.</li><li>soongsil university</li>
+					</ul>
+				</div>
+			</section>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/jquery.scrollgress.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+			<script src="assets/js/logout.js"></script>
+
+			<script>
+				$(document).ready(function() {
+				// MBTI 결과 표시
+				fetchMBTIResult();
+				});
+	
+				function fetchMBTIResult() {
+				$.ajax({
+					url: '/mbti/result', // 서버 엔드포인트
+					method: 'GET',
+					success: function(response) {
+					console.log('MBTI 결과 가져오기 성공:', response);
+					displayMBTIResult(response.result);
+					},
+					error: function(error) {
+					console.log('MBTI 결과 가져오기 실패:', error);
+					}
+				});
+				}
+	
+				function displayMBTIResult(result) {
+				$('#mbti-result').text(result);
+				}
+	
+			</script>
+
+	</body>
+</html>

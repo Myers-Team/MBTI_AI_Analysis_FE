@@ -33,14 +33,14 @@
 
 					<!-- One -->
 						<section class="wrapper style4 special container medium">
-							<p><strong>Q 질문</strong></p>
+							<p id="question"><strong></strong></p>
 							<p style="font-size:13px">※질문에 맞게 주관식 답변을 하시면 됩니다</p>
 							<!-- Content -->
 								<div class="content">
 									<form id="answer-form">
 										<div class="row gtr-50">
 											<div class="col-12">
-												<textarea name="answer" id="answer" placeholder="Answer" rows="7"></textarea>
+												<textarea name="answer" id="answer" placeholder="Answer" rows="12"></textarea>
 											</div>
 											<div class="col-12">
 												<ul class="buttons">
@@ -71,29 +71,65 @@
 
 			<script>
 				$(document).ready(function() {
-				  // Form submission event handler
-				  $('#answer-form').on('submit', function(e) {
-					e.preventDefault(); // Prevent the form from submitting
-			  
-					// Get the answer content from the textarea
-					var answer = $('#answer').val();
-			  
-					// Make an AJAX request to the backend to save the answer
-					$.ajax({
-					  url: '/mbti/test/personal', // Replace with the actual backend endpoint for saving answers
-					  method: 'POST',
-					  data: { answer: answer }, // Pass the answer content as data
-					  success: function(response) {
-						// Handle the response from the backend
-						console.log('Answer saved:', response);
-						// Optionally, you can perform additional actions or show a success message to the user
-					  },
-					  error: function(error) {
-						console.log('Error:', error);
-						// Optionally, you can show an error message to the user
-					  }
+				var questionIndex = 0; // 질문 인덱스
+
+				// 초기 질문 표시
+				fetchQuestion();
+
+				// 폼 제출 이벤트 처리
+				$('#answer-form').on('submit', function(e) {
+					e.preventDefault(); // 폼 제출 방지
+
+					var answer = $('#answer').val(); // 답변 내용 가져오기
+					saveAnswer(answer, function() {
+					// 답변 저장 후 다음 질문 또는 다른 화면으로 이동
+					questionIndex++;
+					if (questionIndex < 20) {
+						fetchQuestion();
+					} else {
+						// 질문이 모두 완료된 경우 다른 화면으로 이동
+						window.location.href = 'mbtiresult.html'; // 다음 페이지의 URL로 변경
+					}
 					});
-				  });
+				});
+
+				// 질문 가져오기 함수 (AJAX 예시)
+				function fetchQuestion() {
+					$.ajax({
+					url: '/user/test/personal', // 서버 엔드포인트
+					method: 'GET',
+					success: function(response) {
+						console.log('질문 가져오기 성공:', response);
+						displayQuestion(response.question);
+					},
+					error: function(error) {
+						console.log('질문 가져오기 실패:', error);
+					}
+					});
+				}
+
+				// 질문 표시 함수
+				function displayQuestion(question) {
+					$('#answer').val(''); // 이전 답변 초기화
+					$('#question').text('Q. ' + question);
+				}
+
+				// 답변 저장 함수 (AJAX 예시)
+				function saveAnswer(answer, callback) {
+					// 실제 서버와 통신하여 답변 저장
+					$.ajax({
+					url: '/user/test/personal', // 실제 서버 엔드포인트로 변경
+					method: 'POST',
+					data: { answer: answer },
+					success: function(response) {
+						console.log('답변 저장 성공:', response);
+						callback(); // 콜백 함수 호출
+					},
+					error: function(error) {
+						console.log('답변 저장 실패:', error);
+					}
+					});
+				}
 				});
 			  </script>
 
