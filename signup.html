@@ -1,0 +1,121 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>MBTI WEBSITE-회원가입</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="contact is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<header id="header">
+					<h1 id="logo"><a href="index.html">MBTI <span>WEBSITE</span></a></h1>
+				</header>
+
+			<!-- Main -->
+				<article id="main">
+
+					<header class="special container">
+						<span class="icon solid fa-check"></span>
+						<h2>회원가입</h2>
+					</header>
+
+					<!-- One -->
+						<section class="wrapper style4 special container medium">
+
+							<!-- Content -->
+								<div class="content">
+									<form id="SignupForm" action="/user/signup" method="POST">
+										<div class="row gtr-50">
+											<div class="col-6 col-12-mobile">
+												<input type="text" name="email" placeholder="Email" />
+											</div>
+											<div class="col-6 col-12-mobile">
+												<input type="text" name="password" placeholder="Password" />
+											</div>
+											<div class="col-12">
+												<input type="text" name="nickname" placeholder="Username" />
+											</div>
+											<div class="col-12">
+												<ul class="buttons">
+													<li><input type="submit" class="special" value="회원가입" /></li>
+												</ul>
+											</div>
+										</div>
+									</form>
+								</div>
+
+
+						</section>
+
+				</article>
+			<!-- Footer -->
+			<section id="footer">
+				<div class="container">
+					<ul class="copyright">
+						<li>&copy; Untitled. All rights reserved.</li><li>soongsil university</li>
+					</ul>
+				</div>
+			</section>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/jquery.scrollgress.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+			<script>
+				document.getElementById("SignupForm").addEventListener("submit", function(event) {
+				  event.preventDefault();
+				  const email = document.getElementsByName("email")[0].value;
+				  const password = document.getElementsByName("password")[0].value;
+				  const nickname = document.getElementsByName("nickname")[0].value;
+			  
+				  const SignupData = {
+					email: email,
+					password: password,
+					nickname: nickname,
+				  };
+			  
+				  fetch('/user/signup', {
+					method: 'POST',
+					headers: {
+					  'Content-Type': 'application/json'
+					},
+					body: JSON.stringify(SignupData)
+				  })
+				  .then(response => response.json())
+				  .then(data => {
+					if (data.user_id) {
+					  // Signup successful
+					  alert('User Signup successful!');
+					  console.log('사용자 ID:', data.user_id);
+					  console.log('이메일:', data.email);
+					  console.log('닉네임:', data.nickname);
+					  // Redirect to another page
+					  window.location.href = "/contact.html";
+					} else {
+					  // Signup failed
+					  alert('User Signup failed.');
+					}
+				  })
+				  .catch(error => {
+					console.error('An error occurred during user Signup:', error);
+					alert('An error occurred during user Signup. Please try again later.');
+				  });
+				});
+			  </script>
+			  
+
+	</body>
+</html>
