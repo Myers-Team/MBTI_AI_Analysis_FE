@@ -23,7 +23,7 @@
 									<li><a href="profile.html">회원정보</a></li>
 								</ul>
 							</li>
-							<li><a href="index.html" class="button primary">로그아웃</a></li>
+							<li><a href="#" id="logout-button" class="button primary">로그아웃</a></li>
 						</ul>
 					</nav>
 				</header>
@@ -37,10 +37,10 @@
 							<p style="font-size:13px">※질문에 맞게 주관식 답변을 하시면 됩니다</p>
 							<!-- Content -->
 								<div class="content">
-									<form>
+									<form id="answer-form">
 										<div class="row gtr-50">
 											<div class="col-12">
-												<textarea name="message" placeholder="Answer" rows="7"></textarea>
+												<textarea name="answer" id="answer" placeholder="Answer" rows="7"></textarea>
 											</div>
 											<div class="col-12">
 												<ul class="buttons">
@@ -67,6 +67,35 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<script src="assets/js/logout.js"></script>
+
+			<script>
+				$(document).ready(function() {
+				  // Form submission event handler
+				  $('#answer-form').on('submit', function(e) {
+					e.preventDefault(); // Prevent the form from submitting
+			  
+					// Get the answer content from the textarea
+					var answer = $('#answer').val();
+			  
+					// Make an AJAX request to the backend to save the answer
+					$.ajax({
+					  url: '/mbti/test/personal', // Replace with the actual backend endpoint for saving answers
+					  method: 'POST',
+					  data: { answer: answer }, // Pass the answer content as data
+					  success: function(response) {
+						// Handle the response from the backend
+						console.log('Answer saved:', response);
+						// Optionally, you can perform additional actions or show a success message to the user
+					  },
+					  error: function(error) {
+						console.log('Error:', error);
+						// Optionally, you can show an error message to the user
+					  }
+					});
+				  });
+				});
+			  </script>
 
 	</body>
 </html>

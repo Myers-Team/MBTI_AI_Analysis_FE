@@ -1,111 +1,132 @@
 <!DOCTYPE HTML>
 <html>
-	<head>
-		<title>MBTI WEBSITE-회원정보</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-	</head>
-	<body class="left-sidebar is-preload">
-		<div id="page-wrapper">
+<head>
+	<title>MBTI WEBSITE-회원정보</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 
-			<!-- Header -->
-				<header id="header">
-					<h1 id="logo"><a href="index2.html">MBTI <span>WEBSITE</span></a></h1>
-					<nav id="nav">
+</head>
+<body class="left-sidebar is-preload">
+	<div id="page-wrapper">
+
+		<!-- Header -->
+		<header id="header">
+			<h1 id="logo"><a href="index2.html">MBTI <span>WEBSITE</span></a></h1>
+			<nav id="nav">
+				<ul>
+					<li class="submenu">
+						<a href="#">Layouts</a>
 						<ul>
-							<li class="submenu">
-								<a href="#">Layouts</a>
-								<ul>
-									<li><a href="statistic.html">통계</a></li>
-									<li><a href="recommend.html">컨텐츠추천</a></li>
-									<li><a href="profile.html">회원정보</a></li>
-								</ul>
-							</li>
-							<li><a href="contact.html" class="button primary">로그아웃</a></li>
+							<li><a href="statistic.html">통계</a></li>
+							<li><a href="recommend.html">컨텐츠추천</a></li>
+							<li><a href="profile.html">회원정보</a></li>
 						</ul>
-					</nav>
-				</header>
+					</li>
+					<li><a href="#" id="logout-button" class="button primary">로그아웃</a></li>
+				</ul>
+			</nav>
+		</header>
 
-			<!-- Main -->
-				<article id="main">
+		<!-- Main -->
+		<article id="main">
 
-					<header class="special container">
-						<span class="icon solid fa-user"></span>
-						<h2><strong>회원정보</strong></h2>
-						<p>회원정보 페이지입니다</p>
-					</header>
+			<header class="special container">
+				<span class="icon solid fa-user"></span>
+				<h2><strong>회원정보</strong></h2>
+				<p>회원정보 페이지입니다</p>
+			</header>
 
-					<!-- One -->
-						<section class="wrapper style4 container">
+			<!-- One -->
+			<section class="wrapper style4 container">
 
-							<div class="row gtr-150">
-								<div class="col-4 col-12-narrower">
+				<div class="row gtr-150">
+					<div class="col-4 col-12-narrower">
 
-									<!-- Sidebar -->
-										<div class="sidebar">
+						<!-- Sidebar -->
+						<div class="sidebar">
 
-											<section>
-												<a href="#" class="image featured"><img src="images/pic03.jpg" alt="" /></a>
-												<header>
-													<h3>홍길동</h3>
-												</header>
-												<p>MBTI : ISTP<br />
-												이상형 MBTI : ISTP
-												</p>
-											</section>
-										</div>
+							<section>
+								<a href="#" class="image featured"><img id="profile-image" src="" alt="profile image" /></a>
+								<header>
+									<h3 id="user-name"></h3>
+								</header>
+								<p>MBTI : <span id="user-mbti"></span><br />
+									이상형 MBTI : <span id="user-idealmbti"></span>
+								</p>
+							</section>
+						</div>
 
-								</div>
-								<div class="col-8 col-12-narrower imp-narrower">
+					</div>
+					<div class="col-8 col-12-narrower imp-narrower">
 
-									<!-- Content -->
-										<div class="content">
-											<section>
-												<header>
-													<h3>회원이 답한 질문</h3>
-												</header>
-												<p>질문1/답변1</p>
-												<p>질문2/답변2</p>
-												<p>질문3/답변3</p>
-											</section>
-											<section>
-												<header>
-													<h3>회원이 답한 질문</h3>
-												</header>
-												<p>질문1/답변1</p>
-												<p>질문2/답변2</p>
-												<p>질문3/답변3</p>
-											</section>
-										</div>
+						<div class="content" id="question-answers"></div>
 
-								</div>
-							</div>
-						</section>
-
-				</article>
-
-			<!-- Footer -->
-			<section id="footer">
-				<div class="container">
-					<ul class="copyright">
-						<li>&copy; Untitled. All rights reserved.</li><li>soongsil university</li>
-					</ul>
+					</div>
 				</div>
 			</section>
-		</div>
 
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.dropotron.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/jquery.scrollgress.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+		</article>
 
-	</body>
+		<!-- Footer -->
+		<footer id="footer">
+
+			<ul class="copyright">
+				<li>&copy; Untitled. All rights reserved.</li><li>soongsil university</li>
+			</ul>
+
+		</footer>
+	</div>
+
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.dropotron.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/jquery.scrollgress.min.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+	<script src="assets/js/logout.js"></script>
+
+	<script>
+	$(document).ready(function() {
+		// AJAX request to fetch user profile
+		$.ajax({
+		  url: '/user/profile', // Replace with the actual backend endpoint for fetching user profile
+		  method: 'GET',
+		  success: function(response) {
+			// Handle the response from the backend
+			var user = response.user; // Assuming the response contains a 'user' object with profile information
+	  
+			// Update HTML elements with the user profile data
+			$('#user-name').text(user.name);
+			$('#profile-image').attr('src', user.profileImage);
+			$('#user-mbit').text(user.mbti);
+			$('#user-idealmbit').text(user.idealmbti);
+
+			const questionAnswers = response.question;
+			updateQuestionAnswers('#question-answers', questionAnswers); // Call the function to update the HTML
+
+		  },
+		  error: function(error) {
+			console.log('Error:', error);
+			// Optionally, you can show an error message to the user
+		  }
+		});
+	  });
+	  function updateQuestionAnswers(elementId, questions) {
+		const questionAnswersElement = $(elementId);
+		for (let i = 0; i < questions.length; i++) {
+			const question = questions[i].question;
+			const answer = questions[i].answer;
+			const questionHtml = `<h3>${i + 1}.${question}</h3><br /><p>${answer}</p>`;
+			questionAnswersElement.append(questionHtml);
+		}
+	}
+	  </script>
+	  
+</body>
 </html>
