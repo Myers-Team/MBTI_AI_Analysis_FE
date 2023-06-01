@@ -214,7 +214,7 @@
 					// 좋아요 버튼 처리 함수
 					function handleLikeButton(contentsId) {
 						$.ajax({
-							url: "/contents",
+							url: "http://localhost:3000/contents",
 							method: "POST",
 							data: { contentsId: contentsId },
 							success: function(response) {
@@ -230,7 +230,7 @@
 					// 싫어요 버튼 처리 함수
 					function handleDislikeButton(contentsId) {
 						$.ajax({
-							url: "/dislike",
+							url: "http://localhost:3000/contents",
 							method: "POST",
 							data: { contentsId: contentsId },
 							success: function(response) {

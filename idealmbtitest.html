@@ -80,8 +80,8 @@
 				$('#answer-form').on('submit', function(e) {
 					e.preventDefault(); // 폼 제출 방지
 
-					var answer = $('#answer').val(); // 답변 내용 가져오기
-					saveAnswer(answer, function() {
+					var p_answer = $('#answer').val(); // 답변 내용 가져오기
+					saveAnswer(p_answer, function() {
 					// 답변 저장 후 다음 질문 또는 다른 화면으로 이동
 					questionIndex++;
 					if (questionIndex < 20) {
@@ -96,7 +96,7 @@
 				// 질문 가져오기 함수 (AJAX 예시)
 				function fetchQuestion() {
 					$.ajax({
-					url: 'http://localhost:3000/user/test/personal', // 서버 엔드포인트
+					url: 'http://localhost:3000/user/test/partner', // 서버 엔드포인트
 					method: 'GET',
 					success: function(response) {
 						console.log('질문 가져오기 성공:', response);
@@ -109,18 +109,18 @@
 				}
 
 				// 질문 표시 함수
-				function displayQuestion(question) {
+				function displayQuestion(p_question) {
 					$('#answer').val(''); // 이전 답변 초기화
-					$('#question').text('Q. ' + question);
+					$('#question').text('Q. ' + p_question);
 				}
 
 				// 답변 저장 함수 (AJAX 예시)
-				function saveAnswer(answer, callback) {
+				function saveAnswer(p_answer, callback) {
 					// 실제 서버와 통신하여 답변 저장
 					$.ajax({
 					url: '/user/test/personal', // 실제 서버 엔드포인트로 변경
 					method: 'POST',
-					data: { answer: answer },
+					data: { p_answer: p_answer },
 					success: function(response) {
 						console.log('답변 저장 성공:', response);
 						callback(); // 콜백 함수 호출
