@@ -15,9 +15,6 @@ import MKTypography from "components/MKTypography";
 import MKInput from "components/MKInput";
 import MKButton from "components/MKButton";
 
-// Images
-import bgImage from "assets/images/bg-sign-in-basic.jpeg";
-
 // axios
 import axios from "axios";
 
@@ -43,10 +40,14 @@ function SignInBasic() {
     console.log("Password:", password);
     // 로그인 처리를 위해 서버에 POST 요청을 보냅니다.
     axios
-      .post("/api/login", { email, password })
+      .post("http://3.35.85.202:8123/user/signin", { email, password })
       .then((response) => {
         // 로그인 성공 여부를 확인합니다.
         if (response.data.success) {
+          // rememberMe 상태가 true인 경우, 토큰을 쿠키에 저장합니다.
+          if (rememberMe) {
+            document.cookie = `token=${response.data.token}; path=/; max-age=604800`; // 7일 동안 쿠키 유지
+          }
           // 로그인 성공 시에 메인 페이지로 이동합니다.
           navigate("/presentation");
         } else {
@@ -137,7 +138,7 @@ function SignInBasic() {
                       Don&apos;t have an account?{" "}
                       <MKTypography
                         component={Link}
-                        to="/authentication/sign-up/cover"
+                        to="/pages/authentication/sign-up"
                         variant="button"
                         color="info"
                         fontWeight="medium"

@@ -1,12 +1,10 @@
 import { useState } from "react";
 
 // react-router-dom components
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 // @mui material components
 import Card from "@mui/material/Card";
-import Switch from "@mui/material/Switch";
 import Grid from "@mui/material/Grid";
 
 // Material Kit 2 React components
@@ -45,12 +43,12 @@ function SignUpBasic() {
   
     // Make a POST request to the server for signup
     axios
-      .post("/user/signup", { name, email, password })
+      .post("http://3.35.85.202:8123/user/signup", { name, email, password })
       .then((response) => {
         // Check if signup is successful
         if (response.data.success) {
           // If signup is successful, navigate to the main page or desired page
-          navigate("/main"); // Replace "/main" with the desired page URL
+          navigate("/presentation"); // Replace "/main" with the desired page URL
         } else {
           // Handle signup failure logic
           console.log("Signup failed:", response.data.error);

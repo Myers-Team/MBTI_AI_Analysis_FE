@@ -22,7 +22,7 @@ function Profile() {
 
   const fetchProfilePicture = async () => {
     try {
-      const response = await axios.get("/api/profile-picture");
+      const response = await axios.get("http://3.35.85.202:8123/user/profile-picture");
       if (response.status !== 200) {
         throw new Error("Failed to fetch profile picture");
       }
@@ -33,7 +33,7 @@ function Profile() {
   };
   const fetchQuestions = async () => {
     try {
-      const response = await axios.get("/api/questions");
+      const response = await axios.get("http://3.35.85.202:8123/mbti/test/user/questions");
       if (response.status !== 200) {
         throw new Error("Failed to fetch questions");
       }

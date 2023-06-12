@@ -25,7 +25,7 @@ function Author() {
         routes={routes}
         action={{
           type: "external",
-          route: "http://localhost:3000/presentation",
+          route: "/presentation",
           label: "log out",
           color: "info",
         }}
