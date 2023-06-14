@@ -70,7 +70,7 @@ function SignUpBasic() {
         width="100%"
         minHeight="100vh"
         sx={{
-          backgroundImage: 'url("images/overlay2.png"), url("images/overlay3.svg"), linear-gradient(45deg, #9dc66b 5%, #4fa49a 30%, #4361c2)',
+          backgroundImage: 'linear-gradient(45deg, #9dc66b 5%, #4fa49a 30%, #4361c2)',
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",

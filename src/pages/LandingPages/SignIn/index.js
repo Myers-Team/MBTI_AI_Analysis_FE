@@ -1,12 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
 
 // react-router-dom components
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 // @mui material components
 import Card from "@mui/material/Card";
-import Switch from "@mui/material/Switch";
 import Grid from "@mui/material/Grid";
 
 // Material Kit 2 React components
@@ -17,14 +15,17 @@ import MKButton from "components/MKButton";
 
 // axios
 import axios from "axios";
+// jwt
+import jwt_decode from "jwt-decode";
+// authcontext
+import AuthContext from "AuthContext";
 
 function SignInBasic() {
-  const [rememberMe, setRememberMe] = useState(false);
   const navigate = useNavigate();
+  const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext); // AuthContext에서 상태 가져오기
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const handleSetRememberMe = () => setRememberMe(!rememberMe);
+  const [error, setError] = useState("");
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -34,30 +35,29 @@ function SignInBasic() {
     setPassword(event.target.value);
   };
 
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      const decodedToken = jwt_decode(token);
+      // Perform any necessary token validation checks
+      setIsAuthenticated(true);
+    }
+  }, []);
+
   const handleSignIn = () => {
-    // 이메일과 비밀번호를 이용하여 로그인 처리를 수행합니다.
-    console.log("Email:", email);
-    console.log("Password:", password);
-    // 로그인 처리를 위해 서버에 POST 요청을 보냅니다.
     axios
       .post("http://3.35.85.202:8123/user/signin", { email, password })
       .then((response) => {
-        // 로그인 성공 여부를 확인합니다.
-        if (response.data.success) {
-          // rememberMe 상태가 true인 경우, 토큰을 쿠키에 저장합니다.
-          if (rememberMe) {
-            document.cookie = `token=${response.data.token}; path=/; max-age=604800`; // 7일 동안 쿠키 유지
-          }
-          // 로그인 성공 시에 메인 페이지로 이동합니다.
-          navigate("/presentation");
-        } else {
-          // 로그인 실패 시에 처리 로직을 구현합니다.
-          console.log("로그인 실패: ", response.data.error);
-        }
+        const { token } = response.data;
+        const decodedToken = jwt_decode(token);
+
+        // Store the token in local storage or a secure storage mechanism
+        localStorage.setItem("token", token);
+        setIsAuthenticated(true);
+        navigate("/presentation", { state: { isAuthenticated: true } });
       })
       .catch((error) => {
-        // 예외 처리 로직을 구현합니다.
-        console.error("로그인 요청 중 오류 발생: ", error);
+        setError("로그인 실패: " + error.response.data.error);
       });
   };
 
@@ -71,7 +71,7 @@ function SignInBasic() {
         width="100%"
         minHeight="100vh"
         sx={{
-          backgroundImage: 'url("images/overlay2.png"), url("images/overlay3.svg"), linear-gradient(45deg, #9dc66b 5%, #4fa49a 30%, #4361c2)',
+          backgroundImage: 'linear-gradient(45deg, #9dc66b 5%, #4fa49a 30%, #4361c2)',
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
@@ -117,16 +117,6 @@ function SignInBasic() {
                   />
                   </MKBox>
                   <MKBox display="flex" alignItems="center" ml={-1}>
-                    <Switch checked={rememberMe} onChange={handleSetRememberMe} />
-                    <MKTypography
-                      variant="button"
-                      fontWeight="regular"
-                      color="text"
-                      onClick={handleSetRememberMe}
-                      sx={{ cursor: "pointer", userSelect: "none", ml: -1 }}
-                    >
-                      &nbsp;&nbsp;Remember me
-                    </MKTypography>
                   </MKBox>
                   <MKBox mt={4} mb={1}>
                     <MKButton variant="gradient" color="info" fullWidth onClick={handleSignIn}>

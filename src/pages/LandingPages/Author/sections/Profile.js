@@ -22,7 +22,7 @@ function Profile() {
 
   const fetchProfilePicture = async () => {
     try {
-      const response = await axios.get("http://3.35.85.202:8123/user/profile-picture");
+      const response = await axios.get("http://localhost:8080/user/profile");
       if (response.status !== 200) {
         throw new Error("Failed to fetch profile picture");
       }
@@ -33,7 +33,7 @@ function Profile() {
   };
   const fetchQuestions = async () => {
     try {
-      const response = await axios.get("http://3.35.85.202:8123/mbti/test/user/questions");
+      const response = await axios.get("http://localhost:8080/mbti/test/personal");
       if (response.status !== 200) {
         throw new Error("Failed to fetch questions");
       }
@@ -75,7 +75,7 @@ function Profile() {
               </Grid>
               {questions.map((question, index) => (
                 <MKTypography key={index} variant="body1" fontWeight="light" color="text">
-                  Q{index + 1}. {question.text} <br />
+                  Q{index + 1}. {question.question} <br />
                   A. {question.answer} <br />
                 </MKTypography>
               ))}

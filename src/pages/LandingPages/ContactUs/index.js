@@ -33,7 +33,7 @@ function ContactUs() {
   const fetchQuestion = async () => {
     try {
       // Make an API request to fetch the question
-      const response = await fetch("http://3.35.85.202:8123/mbti/test/personal/question"); // Replace "/api/question" with the actual API endpoint
+      const response = await axios.get("http://3.35.85.202:8123/mbti/test/personal");
 
       if (response.status === 200) {
         setQuestion(response.data.question);
@@ -52,7 +52,7 @@ function ContactUs() {
     
     try {
       // Make an API request to submit the answer
-      const response = await axios.post("http://3.35.85.202:8123/mbti/test/personal/answer", { answer }); // Replace "/api/answer" with the actual API endpoint
+      const response = await axios.post("http://3.35.85.202:8123/mbti/test/personal", { answer }); // Replace with the actual API endpoint
     
       if (response.status === 200) {
         // Clear the answer input

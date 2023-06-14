@@ -1,3 +1,6 @@
+import React, { useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 // @mui material components
 import Card from "@mui/material/Card";
 
@@ -15,35 +18,58 @@ import Profile from "pages/LandingPages/Author/sections/Profile";
 import routes from "routes";
 import footerRoutes from "footer.routes";
 
-// Images
-//import bgImage from "assets/images/city-profile.jpg";
+// authcontext
+import AuthContext from "AuthContext";
 
 function Author() {
+  const navigate = useNavigate();
+  const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext); // AuthContext에서 상태 가져오기
+
+  const handleLogout = () => {
+    // 로그아웃 버튼을 클릭할 때 호출되는 함수
+    // 토큰을 제거하는 동작을 수행합니다.
+    // 예시로 localStorage에서 토큰을 제거하는 코드를 작성하였습니다.
+    localStorage.removeItem("token");
+    navigate("/presentation", { state: { isAuthenticated: false } }); //로그아웃 후 메인 페이지로 이동
+  };
+
+  useEffect(() => {
+    if(isAuthenticated){
+      setIsAuthenticated(true);
+    }
+    else{
+      setIsAuthenticated(false);
+    }
+  }, [setIsAuthenticated]);
+
   return (
     <>
       <DefaultNavbar
         routes={routes}
         action={{
-          type: "external",
-          route: "/presentation",
-          label: "log out",
+          type: "internal",
+          route: isAuthenticated ? "/presentation" : "/pages/authentication/sign-in",
+          label: isAuthenticated ? "log out" : "sign in",
           color: "info",
+          onClick: handleLogout,
         }}
         transparent
         light
       />
+      
       <MKBox bgColor="white">
         <MKBox
           minHeight="25rem"
           width="100%"
           sx={{
-            backgroundImage: 'url("images/overlay2.png"), url("images/overlay3.svg"), linear-gradient(45deg, #9dc66b 5%, #4fa49a 30%, #4361c2)',
+            backgroundImage: 'linear-gradient(45deg, #9dc66b 5%, #4fa49a 30%, #4361c2)',
             backgroundSize: "cover",
             backgroundPosition: "center",
             display: "grid",
             placeItems: "center",
           }}
         />
+      {isAuthenticated ? (
         <Card
           sx={{
             p: 2,
@@ -57,6 +83,7 @@ function Author() {
         >
           <Profile />
         </Card>
+      ) : null}
       </MKBox>
       <MKBox pt={6} px={1} mt={6}>
         <DefaultFooter content={footerRoutes} />
