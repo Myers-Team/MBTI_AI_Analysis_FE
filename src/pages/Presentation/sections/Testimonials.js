@@ -28,7 +28,7 @@ function Information() {
 
   const fetchSongReviews = async () => {
     try {
-      const response = await axios.get("/api/song-reviews");
+      const response = await axios.get("http://3.35.85.202:8123/contents");//song-reviews
       if (response.status !== 200) {
         throw new Error("Failed to fetch song reviews");
       }
@@ -39,7 +39,7 @@ function Information() {
   };
   const fetchMovieReviews = async () => {
     try {
-      const response = await axios.get("/api/movie-reviews");
+      const response = await axios.get("http://3.35.85.202:8123/contents");//movie-reviews
       if (response.status !== 200) {
         throw new Error("Failed to fetch movie reviews");
       }
