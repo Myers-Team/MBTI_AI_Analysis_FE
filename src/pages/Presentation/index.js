@@ -1,7 +1,5 @@
-import React, { useState } from "react";
-
-// react-router-dom components
-import { useNavigate } from "react-router-dom";
+import React from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 // @mui material components
 import Container from "@mui/material/Container";
@@ -20,31 +18,26 @@ import DefaultFooter from "examples/Footers/DefaultFooter";
 import routes from "routes";
 import footerRoutes from "footer.routes";
 
-// Images
-import bgImage from "assets/images/bg-about-us.jpg";
-
 function Presentation() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // Set initial signin state
-
-  const handleSignOut = () => {
-    // Clear user authentication tokens or session data
-    // For example, if you are using localStorage:
-    localStorage.removeItem("authToken");
-  
-    // Update the login state
-    setIsLoggedIn(false);
-  };
-  
   const navigate = useNavigate();
+  const location = useLocation();
+  const isAuthenticated = location.state?.isAuthenticated || false;
 
   const handleStart = () => {
-    if (isLoggedIn) {
-      // Redirect to a different page if the user is logged in
-      navigate("http://localhost:3000/pages/landing-pages/contact-us");
+    if (isAuthenticated) {
+      navigate("/pages/landing-pages/contact-us");
     } else {
-      // Redirect to the login page if the user is not logged in
-      navigate("http://localhost:3000/pages/authentication/sign-in"); // Replace "/authentication/sign-in" with the login page URL
+      navigate("/pages/authentication/sign-in");
     }
+  };
+
+  const handleLogout = () => {
+    // 로그아웃 버튼을 클릭할 때 호출되는 함수
+    // 토큰을 제거하는 동작을 수행합니다.
+    // 예시로 localStorage에서 토큰을 제거하는 코드를 작성하였습니다.
+    localStorage.removeItem("token");
+
+    navigate("/presentation", { state: { isAuthenticated: false } }); //로그아웃 후 메인 페이지로 이동
   };
 
   return (
@@ -52,24 +45,20 @@ function Presentation() {
       <DefaultNavbar
         routes={routes}
         action={{
-          type: "external",
-          route: isLoggedIn ? "#" : "http://localhost:3000/pages/authentication/sign-in",
-          label: isLoggedIn ? "Log out" : "Sign in",
+          type: "internal",
+          route: isAuthenticated ? "/presentation" : "/pages/authentication/sign-in",
+          label: isAuthenticated ? "log out" : "sign in",
           color: "default",
+          onClick: handleLogout,
         }}
         transparent
         light
-        onActionClick={isLoggedIn ? handleSignOut : undefined}
       />
       <MKBox
         minHeight="75vh"
         width="100%"
         sx={{
-          backgroundImage: ({ functions: { linearGradient, rgba }, palette: { gradients } }) =>
-            `${linearGradient(
-              rgba(gradients.dark.main, 0.6),
-              rgba(gradients.dark.state, 0.6)
-            )}, url(${bgImage})`,
+          backgroundImage: 'linear-gradient(45deg, #9dc66b 5%, #4fa49a 30%, #4361c2)',
           backgroundSize: "cover",
           backgroundPosition: "center",
           display: "grid",
