@@ -17,7 +17,7 @@ import MKButton from "components/MKButton";
 import axios from "axios";
 
 function SignUpBasic() {
-  const [name, setName] = useState("");
+  const [nickname, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -37,18 +37,19 @@ function SignUpBasic() {
 
   const handleSignUp = () => {
     // Perform the signup process using the name, email, and password
-    console.log("Name:", name);
+    console.log("Name:", nickname);
     console.log("Email:", email);
     console.log("Password:", password);
   
     // Make a POST request to the server for signup
     axios
-      .post("http://3.35.85.202:8123/user/signup", { name, email, password })
+      .post("http://cors-anywhere.herokuapp.com/http://3.35.85.202:8123/user/user", { nickname, email, password })
       .then((response) => {
+        //console.log("Signup response:", response); //check response
         // Check if signup is successful
-        if (response.data.success) {
+        if (response.status === 200) {
           // If signup is successful, navigate to the main page or desired page
-          navigate("/presentation"); // Replace "/main" with the desired page URL
+          navigate("/pages/authentication/sign-in"); // Replace "/main" with the desired page URL
         } else {
           // Handle signup failure logic
           console.log("Signup failed:", response.data.error);
@@ -92,7 +93,7 @@ function SignUpBasic() {
                 textAlign="center"
               >
                 <MKTypography variant="h4" fontWeight="medium" color="white" mt={1}>
-                  Sign in
+                  Sign up
                 </MKTypography>
               </MKBox>
               <MKBox pt={4} pb={3} px={3}>
@@ -101,7 +102,7 @@ function SignUpBasic() {
                   <MKInput
                       type="text"
                       label="name"
-                      value={name}
+                      value={nickname}
                       onChange={handleNameChange}
                       fullWidth
                   />
