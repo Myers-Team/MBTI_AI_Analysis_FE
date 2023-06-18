@@ -15,7 +15,7 @@ import DefaultReviewCard from "examples/Cards/ReviewCards/DefaultReviewCard";
 import axios from "axios";
 
 function Information() {
-  const [contents, setContents] = useState([]);
+  const [songs, setSongs] = useState([]);
   // 사용자 ID 추가
   const [userId, setUserId] = useState(1); // eslint-disable-line no-unused-vars
 
@@ -31,8 +31,8 @@ function Information() {
         },
       });
       if (response.status === 200) {
-        const { content } = response.data;
-        setContents(content);
+        const { song } = response.data;
+        setSongs(song);
       }else {
         throw new Error("Failed to fetch contents name");
     }
@@ -40,7 +40,7 @@ function Information() {
       console.log("Failed to fetch contents name:", error);
     }
   };
-
+console.log(songs);
   return (
     <MKBox component="section" py={12}>
       <Container>
@@ -56,30 +56,13 @@ function Information() {
         </Grid>
         <Grid container spacing={3} sx={{ mt: 8 }} >
           <Grid item xs={12} md={6} lg={4}>
-            <DefaultReviewCard name={contents.song_name} />
+            <DefaultReviewCard name={songs.song_name} />
           </Grid>
         </Grid>
         <Divider sx={{ my: 6 }} />
         <Grid container spacing={3} justifyContent="center">
         </Grid>
-        <Grid
-          container
-          item
-          xs={12}
-          lg={6}
-          justifyContent="center"
-          sx={{ mx: "auto", textAlign: "center" }}
-        >
-          <MKTypography variant="h2">movie recommend</MKTypography>
-        </Grid>
-        <Grid container spacing={3} sx={{ mt: 8 }} >
-          <Grid item xs={12} md={6} lg={4}>
-            <DefaultReviewCard name={contents.movie_name} />
-          </Grid>
-        </Grid>
-        <Divider sx={{ my: 6 }} />
-        <Grid container spacing={3} justifyContent="center">
-        </Grid>
+        
       </Container>
       <Container>
         <Grid
