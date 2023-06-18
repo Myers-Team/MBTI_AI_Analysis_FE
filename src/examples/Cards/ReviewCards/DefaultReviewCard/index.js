@@ -8,7 +8,7 @@ import MKTypography from "components/MKTypography";
 // axios
 import axios from "axios";
 
-function DefaultReviewCard({ color, image, name, review, liked, disliked }) {
+function DefaultReviewCard({ color, image, name, review, liked, disliked }) { // eslint-disable-line no-unused-vars
   const [hasLiked, setHasLiked] = useState(false);
   const [hasDisliked, setHasDisliked] = useState(false);
 
@@ -45,13 +45,21 @@ function DefaultReviewCard({ color, image, name, review, liked, disliked }) {
 
   const saveLikes = async (liked, disliked) => {
     try {
-      if(hasDisliked){const response = await axios.post("http://cors-anywhere.herokuapp.com/http://3.35.85.202:8123/contents/songs/1/dislike", { liked, disliked, });
-    }else if(hasLiked){
-      const response = await axios.post("http://cors-anywhere.herokuapp.com/http://3.35.85.202:8123/contents/songs/1/like", { liked, disliked, });
-    }
-      if (response.status !== 200) {
+      if(hasDisliked){const response = await axios.post("http://cors-anywhere.herokuapp.com/http://3.35.85.202:8123/contents/songs/1/dislike", { liked, disliked, }); // eslint-disable-line no-unused-vars
+        if (response.status !== 200) { 
         throw new Error("Likes Dislikes could not be saved.");
       }
+      // DisLikes saved successfully
+    }else if(hasLiked){
+      const response = await axios.post("http://cors-anywhere.herokuapp.com/http://3.35.85.202:8123/contents/songs/1/like", { liked, disliked, }); // eslint-disable-line no-unused-vars
+      if (response.status !== 200) { 
+        throw new Error("Likes Dislikes could not be saved.");
+      }
+      // Likes saved successfully
+    }
+      //if (response.status !== 200) { 
+        //throw new Error("Likes Dislikes could not be saved.");
+      //}
       // Likes saved successfully
     } catch (error) {
       console.error(error);
