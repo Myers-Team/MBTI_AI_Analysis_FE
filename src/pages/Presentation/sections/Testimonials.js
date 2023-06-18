@@ -15,7 +15,7 @@ import DefaultReviewCard from "examples/Cards/ReviewCards/DefaultReviewCard";
 import axios from "axios";
 
 function Information() {
-  const [songs, setSongs] = useState([]);
+  const [contents, setContents] = useState([]);
   // 사용자 ID 추가
   const [userId, setUserId] = useState(1); // eslint-disable-line no-unused-vars
 
@@ -29,15 +29,15 @@ function Information() {
         params: {
           user_id: userId, // 사용자 식별 값을 전달합니다.
         },
-      });//song
+      });
       if (response.status === 200) {
-        const songs = response.data;
-        setSongs(songs);
+        const { content } = response.data;
+        setContents(content);
       }else {
-        throw new Error("Failed to fetch song name");
+        throw new Error("Failed to fetch contents name");
     }
     } catch (error) {
-      console.log("Failed to fetch song name:", error);
+      console.log("Failed to fetch contents name:", error);
     }
   };
 
@@ -54,12 +54,28 @@ function Information() {
         >
           <MKTypography variant="h2">song recommend</MKTypography>
         </Grid>
-        <Grid container spacing={3} sx={{ mt: 8 }}>
-        {songs.map((songs) => (
-          <Grid item xs={12} md={6} lg={4} key={songs.id}>
-            <DefaultReviewCard name={songs.song_name} />
+        <Grid container spacing={3} sx={{ mt: 8 }} >
+          <Grid item xs={12} md={6} lg={4}>
+            <DefaultReviewCard name={contents.song_name} />
           </Grid>
-        ))}
+        </Grid>
+        <Divider sx={{ my: 6 }} />
+        <Grid container spacing={3} justifyContent="center">
+        </Grid>
+        <Grid
+          container
+          item
+          xs={12}
+          lg={6}
+          justifyContent="center"
+          sx={{ mx: "auto", textAlign: "center" }}
+        >
+          <MKTypography variant="h2">movie recommend</MKTypography>
+        </Grid>
+        <Grid container spacing={3} sx={{ mt: 8 }} >
+          <Grid item xs={12} md={6} lg={4}>
+            <DefaultReviewCard name={contents.movie_name} />
+          </Grid>
         </Grid>
         <Divider sx={{ my: 6 }} />
         <Grid container spacing={3} justifyContent="center">
