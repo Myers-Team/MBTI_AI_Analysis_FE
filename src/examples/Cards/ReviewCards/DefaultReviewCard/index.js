@@ -4,9 +4,11 @@ import Icon from "@mui/material/Icon";
 import MKBox from "components/MKBox";
 import MKAvatar from "components/MKAvatar";
 import MKTypography from "components/MKTypography";
+
+// axios
 import axios from "axios";
 
-function DefaultReviewCard({ color, image, name, review }) {
+function DefaultReviewCard({ color, image, name, review, liked, disliked }) {
   const [hasLiked, setHasLiked] = useState(false);
   const [hasDisliked, setHasDisliked] = useState(false);
 
@@ -25,6 +27,7 @@ function DefaultReviewCard({ color, image, name, review }) {
     }
   };
 
+
   const handleDislikeClick = async () => {
     if (hasDisliked) {
       setHasDisliked(false);
@@ -42,13 +45,12 @@ function DefaultReviewCard({ color, image, name, review }) {
 
   const saveLikes = async (liked, disliked) => {
     try {
-      const response = await axios.post("/api/likes", {
-        liked,
-        disliked,
-        cardId: name,
-      });
+      if(hasDisliked){const response = await axios.post("http://cors-anywhere.herokuapp.com/http://3.35.85.202:8123/contents/songs/1/dislike", { liked, disliked, });
+    }else if(hasLiked){
+      const response = await axios.post("http://cors-anywhere.herokuapp.com/http://3.35.85.202:8123/contents/songs/1/like", { liked, disliked, });
+    }
       if (response.status !== 200) {
-        throw new Error("Likes could not be saved.");
+        throw new Error("Likes Dislikes could not be saved.");
       }
       // Likes saved successfully
     } catch (error) {
