@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"; // eslint-disable-line no-unused-vars
 
 // @mui material components
 import Container from "@mui/material/Container";
@@ -25,9 +25,9 @@ import footerRoutes from "footer.routes";
 import AuthContext from "AuthContext";
 
 function AboutUs() {
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext); // AuthContext에서 상태 가져오기
-
+/*
   const handleLogout = () => {
     // 로그아웃 버튼을 클릭할 때 호출되는 함수
     // 토큰을 제거하는 동작을 수행합니다.
@@ -35,7 +35,7 @@ function AboutUs() {
     localStorage.removeItem("token");
     navigate("/presentation", { state: { isAuthenticated: false } }); //로그아웃 후 메인 페이지로 이동
   };
-
+*/
   useEffect(() => {
     if(isAuthenticated){
       setIsAuthenticated(true);

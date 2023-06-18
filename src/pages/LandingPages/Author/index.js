@@ -1,5 +1,5 @@
-import React, { useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useContext, useEffect } from "react"; // eslint-disable-line no-unused-vars
+import { useNavigate } from "react-router-dom"; // eslint-disable-line no-unused-vars
 
 // @mui material components
 import Card from "@mui/material/Card";
@@ -22,8 +22,9 @@ import footerRoutes from "footer.routes";
 import AuthContext from "AuthContext";
 
 function Author() {
-  const navigate = useNavigate();
-  const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext); // AuthContext에서 상태 가져오기
+  //const navigate = useNavigate();
+  // AuthContext에서 상태 가져오기
+  const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext); // eslint-disable-line no-unused-vars
 /*
   const handleLogout = () => {
     // 로그아웃 버튼을 클릭할 때 호출되는 함수

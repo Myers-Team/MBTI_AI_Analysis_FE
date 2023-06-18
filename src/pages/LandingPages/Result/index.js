@@ -30,7 +30,7 @@ function Result() {
       navigate("/pages/authentication/sign-in");
     }
   };
-
+/*
   const handleLogout = () => {
     // 로그아웃 버튼을 클릭할 때 호출되는 함수
     // 토큰을 제거하는 동작을 수행합니다.
@@ -39,17 +39,19 @@ function Result() {
 
     navigate("/presentation", { state: { isAuthenticated: false } }); //로그아웃 후 메인 페이지로 이동
   };
-
+*/
   return (
     <>
       <DefaultNavbar
         routes={routes}
         action={{
           type: "internal",
-          route: isAuthenticated ? "/presentation" : "/pages/authentication/sign-in",
-          label: isAuthenticated ? "log out" : "sign in",
+          //route: isAuthenticated ? "/presentation" : "/pages/authentication/sign-in",
+          //label: isAuthenticated ? "log out" : "sign in",
+          route: "/presentation",
+          label: "log out",
           color: "default",
-          onClick: handleLogout,
+          //onClick: handleLogout,
         }}
         transparent
         light

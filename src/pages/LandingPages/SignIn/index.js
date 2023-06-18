@@ -16,13 +16,14 @@ import MKButton from "components/MKButton";
 // axios
 import axios from "axios";
 // jwt
-import jwt_decode from "jwt-decode";
+//import jwt_decode from "jwt-decode";
 // authcontext
 import AuthContext from "AuthContext";
 
 function SignInBasic() {
   const navigate = useNavigate();
-  const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext); // AuthContext에서 상태 가져오기
+  // AuthContext에서 상태 가져오기
+  const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext); // eslint-disable-line no-unused-vars
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -37,7 +38,7 @@ function SignInBasic() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      const decodedToken = jwt_decode(token);
+      //const decodedToken = jwt_decode(token);
       // Perform any necessary token validation checks
       setIsAuthenticated(true);
     }
@@ -45,10 +46,10 @@ function SignInBasic() {
 
   const handleSignIn = () => {
     axios
-      .post("http://cors-anywhere.herokuapp.com/http://3.35.85.202:8123/user/signup", { email, password })
+      .post("http://cors-anywhere.herokuapp.com/http://3.35.85.202:8123/user/signin", { email, password })
       .then((response) => {
         const { token } = response.data;
-        const decodedToken = jwt_decode(token);
+        //const decodedToken = jwt_decode(token);
 
         // Store the token in local storage or a secure storage mechanism
         localStorage.setItem("token", token);

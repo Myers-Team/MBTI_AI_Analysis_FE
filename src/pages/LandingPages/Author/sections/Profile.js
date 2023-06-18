@@ -14,8 +14,8 @@ import axios from "axios";
 function Profile() {
   const [profilePicture, setProfilePicture] = useState("");
   const [stats, setStats] = useState([]);
-
-  const [userId, setUserId] = useState(1); // 사용자 ID 추가
+  // 사용자 ID 추가
+  const [userId, setUserId] = useState(1); // eslint-disable-line no-unused-vars
 
   useEffect(() => {
     fetchProfilePicture();
@@ -89,7 +89,7 @@ function Profile() {
               {stats.map((stats, index) => (
                 <MKTypography key={index} variant="body1" fontWeight="light" color="text">
                   Q{index + 1}. {stats.question} <br />
-                  A. {stats.answer} <br />
+                  A. {stats.answer} <br /><br />
                 </MKTypography>
               ))}
             </Grid>

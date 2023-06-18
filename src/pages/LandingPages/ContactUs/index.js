@@ -25,8 +25,8 @@ import axios from "axios";
 function ContactUs() {
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
-
-  const [userId, setUserId] = useState(1); // 사용자 ID 추가
+  // 사용자 ID 추가
+  const [userId, setUserId] = useState(1); // eslint-disable-line no-unused-vars
 
   const navigate = useNavigate();
 
@@ -43,7 +43,6 @@ function ContactUs() {
           user_id: userId, // 사용자 식별 값을 전달합니다.
         },
       });
-      console.log(response);
       
       if (response.status === 200) {
         setQuestion(response.data.question);
