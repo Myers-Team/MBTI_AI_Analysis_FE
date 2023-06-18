@@ -29,6 +29,7 @@ import AboutUs from "layouts/pages/landing-pages/about-us";
 import ContactUs from "layouts/pages/landing-pages/contact-us";
 import Author from "layouts/pages/landing-pages/author";
 import Statistic from "layouts/pages/landing-pages/statistic";
+import Result from "layouts/pages/landing-pages/result";
 import SignIn from "layouts/pages/authentication/sign-in";
 import SignUp from "layouts/pages/authentication/sign-up";
 
@@ -46,6 +47,11 @@ const routes = [
             name: "test",
             route: "/pages/landing-pages/contact-us",
             component: <ContactUs />,
+          },
+          {
+            name: "result",
+            route: "/pages/landing-pages/result",
+            component: <Result />,
           },
           {
             name: "recommend",
