@@ -24,7 +24,7 @@ import AuthContext from "AuthContext";
 function Author() {
   const navigate = useNavigate();
   const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext); // AuthContext에서 상태 가져오기
-
+/*
   const handleLogout = () => {
     // 로그아웃 버튼을 클릭할 때 호출되는 함수
     // 토큰을 제거하는 동작을 수행합니다.
@@ -41,17 +41,19 @@ function Author() {
       setIsAuthenticated(false);
     }
   }, [setIsAuthenticated]);
-
+*/
   return (
     <>
       <DefaultNavbar
         routes={routes}
         action={{
           type: "internal",
-          route: isAuthenticated ? "/presentation" : "/pages/authentication/sign-in",
-          label: isAuthenticated ? "log out" : "sign in",
+          //route: isAuthenticated ? "/presentation" : "/pages/authentication/sign-in",
+          //label: isAuthenticated ? "log out" : "sign in",
+          route: "/presentation",
+          label: "log out",
           color: "info",
-          onClick: handleLogout,
+          //onClick: handleLogout,
         }}
         transparent
         light
@@ -69,7 +71,7 @@ function Author() {
             placeItems: "center",
           }}
         />
-      {isAuthenticated ? (
+      {//isAuthenticated ? (
         <Card
           sx={{
             p: 2,
@@ -83,7 +85,8 @@ function Author() {
         >
           <Profile />
         </Card>
-      ) : null}
+      //) : null
+    }
       </MKBox>
       <MKBox pt={6} px={1} mt={6}>
         <DefaultFooter content={footerRoutes} />

@@ -13,33 +13,46 @@ import axios from "axios";
 
 function Profile() {
   const [profilePicture, setProfilePicture] = useState("");
-  const [questions, setQuestions] = useState([]);
+  const [stats, setStats] = useState([]);
+
+  const [userId, setUserId] = useState(1); // 사용자 ID 추가
 
   useEffect(() => {
     fetchProfilePicture();
-    fetchQuestions();
+    fetchStats();
   }, []);
 
   const fetchProfilePicture = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/user/profile");
+      const response = await axios.get("http://cors-anywhere.herokuapp.com/http://3.35.85.202:8123/user/profile", {
+        params: {
+          user_id: userId, // 사용자 식별 값을 전달합니다.
+        },
+      });
       if (response.status !== 200) {
         throw new Error("Failed to fetch profile picture");
       }
       setProfilePicture(response.data);
     } catch (error) {
-      console.error(error);
+      console.error("failed to fetch picture:", error);
     }
   };
-  const fetchQuestions = async () => {
+  const fetchStats = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/mbti/test/personal");
-      if (response.status !== 200) {
-        throw new Error("Failed to fetch questions");
+      const response = await axios.get("http://cors-anywhere.herokuapp.com/http://3.35.85.202:8123/stats", {
+        params: {
+          user_id: userId, // 사용자 식별 값을 전달합니다.
+        },
+      });
+
+      if (response.status === 200) {
+        const stats = response.data;
+        setStats(stats);
+      } else {
+        throw new Error("Failed to fetch stats");
       }
-      setQuestions(response.data);
     } catch (error) {
-      console.error(error);
+      console.error("failed to fetch stats:", error);
     }
   };
 
@@ -73,15 +86,12 @@ function Profile() {
                   </MKTypography>
                 </Grid>
               </Grid>
-              {questions.map((question, index) => (
+              {stats.map((stats, index) => (
                 <MKTypography key={index} variant="body1" fontWeight="light" color="text">
-                  Q{index + 1}. {question.question} <br />
-                  A. {question.answer} <br />
+                  Q{index + 1}. {stats.question} <br />
+                  A. {stats.answer} <br />
                 </MKTypography>
               ))}
-              <MKTypography variant="body1" fontWeight="light" color="text">
-                Q. <br />A. <br />
-              </MKTypography>
             </Grid>
           </Grid>
         </Grid>

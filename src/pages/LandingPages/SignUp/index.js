@@ -45,7 +45,7 @@ function SignUpBasic() {
     axios
       .post("http://cors-anywhere.herokuapp.com/http://3.35.85.202:8123/user/user", { nickname, email, password })
       .then((response) => {
-        //console.log("Signup response:", response); //check response
+        console.log("Signup response:", response); //check response
         // Check if signup is successful
         if (response.status === 200) {
           // If signup is successful, navigate to the main page or desired page

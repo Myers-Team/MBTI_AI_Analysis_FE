@@ -25,7 +25,6 @@ function SignInBasic() {
   const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext); // AuthContext에서 상태 가져오기
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -46,7 +45,7 @@ function SignInBasic() {
 
   const handleSignIn = () => {
     axios
-      .post("http://3.35.85.202:8123/user/signin", { email, password })
+      .post("http://cors-anywhere.herokuapp.com/http://3.35.85.202:8123/user/signup", { email, password })
       .then((response) => {
         const { token } = response.data;
         const decodedToken = jwt_decode(token);
@@ -57,7 +56,7 @@ function SignInBasic() {
         navigate("/presentation", { state: { isAuthenticated: true } });
       })
       .catch((error) => {
-        setError("로그인 실패: " + error.response.data.error);
+        console.log("Failed to signin:", error);
       });
   };
 

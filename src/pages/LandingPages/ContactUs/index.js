@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 // @mui material components
 import Grid from "@mui/material/Grid";
@@ -25,6 +26,10 @@ function ContactUs() {
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
 
+  const [userId, setUserId] = useState(1); // 사용자 ID 추가
+
+  const navigate = useNavigate();
+
   useEffect(() => {
     // Fetch the question from the Spring Boot backend
     fetchQuestion();
@@ -33,13 +38,20 @@ function ContactUs() {
   const fetchQuestion = async () => {
     try {
       // Make an API request to fetch the question
-      const response = await axios.get("http://3.35.85.202:8123/mbti/test/personal");
-
+      const response = await axios.get("http://cors-anywhere.herokuapp.com/http://3.35.85.202:8123/mbti/test/personal", {
+        params: {
+          user_id: userId, // 사용자 식별 값을 전달합니다.
+        },
+      });
+      console.log(response);
+      
       if (response.status === 200) {
         setQuestion(response.data.question);
-      } else {
+      } 
+      else {
         // Handle error response
         console.log("Failed to fetch question");
+        navigate("/pages/landing-pages/result");
       }
     } catch (error) {
       // Handle fetch error
@@ -52,15 +64,16 @@ function ContactUs() {
     
     try {
       // Make an API request to submit the answer
-      const response = await axios.post("http://3.35.85.202:8123/mbti/test/personal", { answer }); // Replace with the actual API endpoint
+      const response = await axios.post("http://cors-anywhere.herokuapp.com/http://3.35.85.202:8123/mbti/test/personal", {question, answer}); // Replace with the actual API endpoint
     
       if (response.status === 200) {
         // Clear the answer input
         setAnswer("");
-    
+
         // Fetch the next question
         await fetchQuestion();
-      } else {
+      }
+      else {
         // Handle error response
         console.log("Failed to submit answer");
       }
@@ -121,8 +134,7 @@ function ContactUs() {
               </MKTypography>
             </MKBox>
             <MKBox p={3}>
-              <MKTypography variant="body2" color="text" mb={3}>
-                Q.question
+              <MKTypography variant="body2" color="text" mb={3} style={{ fontSize: "32px" }}>
                 {question}
               </MKTypography>
               <MKBox width="100%" component="form" method="post" autoComplete="off" onSubmit={handleSubmit}>
