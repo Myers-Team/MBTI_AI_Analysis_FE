@@ -24,8 +24,9 @@ function ContactUs() {
   const [answer, setAnswer] = useState("");
   // 사용자 ID 추가
   const [userId, setUserId] = useState(1); // eslint-disable-line no-unused-vars
+  const [qaId, setQaId] = useState(0); // eslint-disable-line no-unused-vars
 
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // eslint-disable-line no-unused-vars
 
   useEffect(() => {
     // Fetch the question from the Spring Boot backend
@@ -47,12 +48,15 @@ function ContactUs() {
       else {
         // Handle error response
         console.log("Failed to fetch question");
+        // no qeuestion remains
         navigate("/pages/landing-pages/result");
       }
     } catch (error) {
       // Handle fetch error
       console.log("Failed to fetch question:", error);
     }
+    // 다음 질문을 가져오기 위해 userId 갱신
+  setUserId(prevUserId => prevUserId + 1);
   };
 
   const handleSubmit = async (e) => {
@@ -60,7 +64,7 @@ function ContactUs() {
     
     try {
       // Make an API request to submit the answer
-      const response = await axios.post("http://cors-anywhere.herokuapp.com/http://3.35.85.202:8123/mbti/test/personal", { answer }); // Replace with the actual API endpoint
+      const response = await axios.post("http://cors-anywhere.herokuapp.com/http://3.35.85.202:8123/mbti/test/personal", { userId, answer }); // Replace with the actual API endpoint
     
       if (response.status === 200) {
         // Clear the answer input
@@ -84,17 +88,16 @@ function ContactUs() {
       <MKBox position="fixed" top="0.5rem" width="100%">
       </MKBox>
       <Grid container spacing={3} alignItems="center">
-        <Grid item xs={12} lg={6}>
           <MKBox
             display={{ xs: "none", lg: "flex" }}
-            width="calc(100% - 2rem)"
+            width="calc(100%)"
             height="calc(100vh - 2rem)"
             borderRadius="lg"
             ml={2}
             mt={2}
             sx={{ backgroundImage: 'linear-gradient(45deg, #9dc66b 5%, #4fa49a 30%, #4361c2)' }}
-          />
-        </Grid>
+          >
+        <Grid container spacing={3} alignItems="center" justifyContent="center">
         <Grid
           item
           xs={12}
@@ -158,7 +161,9 @@ function ContactUs() {
               </MKBox>
             </MKBox>
           </MKBox>
+          </Grid>
         </Grid>
+        </MKBox>
       </Grid>
       <MKBox pt={6} px={1} mt={6}>
         <DefaultFooter content={footerRoutes} />
