@@ -24,7 +24,7 @@ function ContactUs() {
   const [answer, setAnswer] = useState("");
   // 사용자 ID 추가
   const [userId, setUserId] = useState(1); // eslint-disable-line no-unused-vars
-  const [qaId, setQaId] = useState(0); // eslint-disable-line no-unused-vars
+  const [emd_v, setEmd_v] = useState(0.0); // eslint-disable-line no-unused-vars
 
   const navigate = useNavigate(); // eslint-disable-line no-unused-vars
 
@@ -55,8 +55,6 @@ function ContactUs() {
       // Handle fetch error
       console.log("Failed to fetch question:", error);
     }
-    // 다음 질문을 가져오기 위해 userId 갱신
-  setUserId(prevUserId => prevUserId + 1);
   };
 
   const handleSubmit = async (e) => {
@@ -64,7 +62,12 @@ function ContactUs() {
     
     try {
       // Make an API request to submit the answer
-      const response = await axios.post("http://cors-anywhere.herokuapp.com/http://3.35.85.202:8123/mbti/test/personal", { userId, answer }); // Replace with the actual API endpoint
+      const response = await axios.post("http://cors-anywhere.herokuapp.com/http://3.35.85.202:8123/mbti/test/personal", {
+        question: question,
+        user_id: userId,
+        answer: answer,
+        emd_v: emd_v
+      }); // Replace with the actual API endpoint
     
       if (response.status === 200) {
         // Clear the answer input

@@ -67,14 +67,14 @@ function Information() {
                 <DefaultInfoCard
                   icon="filter_1"
                   title="낙관적인 거 같습니다"
-                  description="43%"
+                  //description="43%"
                 />
               </Grid>
               <Grid item xs={12} md={6}>
                 <DefaultInfoCard
                   icon="filter_2"
                   title="딱히 별 생각없습니다"
-                  description="35%"
+                  //description="35%"
                 />
               </Grid>
             </Grid>
@@ -83,14 +83,14 @@ function Information() {
                 <DefaultInfoCard
                   icon="filter_3"
                   title="낙관적일 때도 있고 비관적일 때도 있습니다"
-                  description="21%"
+                  //description="21%"
                 />
               </Grid>
               <Grid item xs={12} md={6}>
                 <DefaultInfoCard
                   icon="filter_4"
                   title="잘 모르겠습니다"
-                  description="1%"
+                  //description="1%"
                 />
               </Grid>
             </Grid>
@@ -130,14 +130,14 @@ function Information() {
                 <DefaultInfoCard
                   icon="filter_1"
                   title="낙관적인 편입니다"
-                  description="67%"
+                  //description="67%"
                 />
               </Grid>
               <Grid item xs={12} md={6}>
                 <DefaultInfoCard
                   icon="filter_2"
                   title="낙관적일 때도 있고 비관적일 때도 있습니다"
-                  description="21%"
+                  //description="21%"
                 />
               </Grid>
             </Grid>
@@ -146,14 +146,14 @@ function Information() {
                 <DefaultInfoCard
                   icon="filter_3"
                   title="비관적인 편입니다"
-                  description="10%"
+                  //description="10%"
                 />
               </Grid>
               <Grid item xs={12} md={6}>
                 <DefaultInfoCard
                   icon="filter_4"
                   title="잘 모르겠습니다"
-                  description="2%"
+                  //description="2%"
                 />
               </Grid>
             </Grid>

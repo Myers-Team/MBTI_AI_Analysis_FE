@@ -104,6 +104,14 @@ function Presentation() {
           </Grid>
         </Container>
       </MKBox>
+      <div style={{ display: "flex", gap: "10px", justifyContent: "center" }}>
+            <MKButton color="default" sx={{ color: ({ palette: { dark } }) => dark.main }}>
+              precise-start
+            </MKButton>
+            <MKButton color="dark" sx={{ color: ({ palette: { white } }) => white.main }}>
+              pecise-idle start
+            </MKButton>
+            </div>
       <MKBox pt={6} px={1} mt={6}>
         <DefaultFooter content={footerRoutes} />
       </MKBox>
