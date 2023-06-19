@@ -82,14 +82,14 @@ function Profile() {
                     IDEALMBTI : &nbsp;
                   </MKTypography>
                   <MKTypography component="span" variant="body2" color="text">
-                    ISTP
+                    ENFJ
                   </MKTypography>
                 </Grid>
               </Grid>
               {stats.map((stats, index) => (
                 <MKTypography key={index} variant="body1" fontWeight="light" color="text">
                   Q{index + 1}. {stats.question} <br />
-                  A. {stats.answer} <br /><br />
+                  A. {stats.answer} <br />
                 </MKTypography>
               ))}
             </Grid>

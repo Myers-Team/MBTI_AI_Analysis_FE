@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 // @mui material components
@@ -18,17 +18,15 @@ import DefaultFooter from "examples/Footers/DefaultFooter";
 import routes from "routes";
 import footerRoutes from "footer.routes";
 
+import axios from "axios";
+
 function Result() {
   const navigate = useNavigate();
   const location = useLocation();
-  const isAuthenticated = location.state?.isAuthenticated || false;
+  const isAuthenticated = location.state?.isAuthenticated || false; // eslint-disable-line no-unused-vars
 
   const handleStart = () => {
-    if (isAuthenticated) {
-      navigate("/pages/landing-pages/contact-us");
-    } else {
-      navigate("/pages/authentication/sign-in");
-    }
+    navigate("/presentation");
   };
 /*
   const handleLogout = () => {
@@ -40,6 +38,30 @@ function Result() {
     navigate("/presentation", { state: { isAuthenticated: false } }); //로그아웃 후 메인 페이지로 이동
   };
 */
+const [result, setResult] = useState("");
+// 사용자 ID 추가
+const [userId, setUserId] = useState(1); // eslint-disable-line no-unused-vars
+
+  useEffect(() => {
+    fetchResult();
+  }, []);
+
+  const fetchResult = async () => {
+    try {
+      const response = await axios.get("http://cors-anywhere.herokuapp.com/http://3.35.85.202:8123/mbti/result", {
+        params: {
+          user_id: userId, // 사용자 식별 값을 전달합니다.
+        },
+      });
+      if (response.status !== 200) {
+        throw new Error("Failed to fetch mbti result");
+      }
+      setResult(response.data);
+    } catch (error) {
+      console.error("failed to fetch mbti result:", error);
+    }
+  };
+
   return (
     <>
       <DefaultNavbar
@@ -90,7 +112,8 @@ function Result() {
                 },
               })} mt={1} mb={3}
               >
-              ENFJ
+              {result}
+              ISTP
             </MKTypography>
             <MKButton color="default" sx={{ color: ({ palette: { dark } }) => dark.main }} onClick={handleStart}>
               go home

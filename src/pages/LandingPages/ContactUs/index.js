@@ -16,9 +16,6 @@ import DefaultFooter from "examples/Footers/DefaultFooter";
 // Routes
 import footerRoutes from "footer.routes";
 
-// Image
-import bgImage from "assets/images/illustrations/illustration-reset.jpg";
-
 // axios
 import axios from "axios";
 
@@ -63,7 +60,7 @@ function ContactUs() {
     
     try {
       // Make an API request to submit the answer
-      const response = await axios.post("http://cors-anywhere.herokuapp.com/http://3.35.85.202:8123/mbti/test/personal", {question, answer}); // Replace with the actual API endpoint
+      const response = await axios.post("http://cors-anywhere.herokuapp.com/http://3.35.85.202:8123/mbti/test/personal", { answer }); // Replace with the actual API endpoint
     
       if (response.status === 200) {
         // Clear the answer input
@@ -95,7 +92,7 @@ function ContactUs() {
             borderRadius="lg"
             ml={2}
             mt={2}
-            sx={{ backgroundImage: `url(${bgImage})` }}
+            sx={{ backgroundImage: 'linear-gradient(45deg, #9dc66b 5%, #4fa49a 30%, #4361c2)' }}
           />
         </Grid>
         <Grid

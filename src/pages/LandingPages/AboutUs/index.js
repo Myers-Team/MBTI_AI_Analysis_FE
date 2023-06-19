@@ -53,12 +53,13 @@ function AboutUs() {
           type: "internal",
           //route: isAuthenticated ? "/presentation" : "/pages/authentication/sign-in",
           //label: isAuthenticated ? "log out" : "sign in",
-          route: "/pages/authentication/sign-in",
-          label: "sign in",
+          route: "/presentation",
+          label: "log out",
           color: "info",
           //onClick: handleLogout,
         }}
-        sticky
+        transparent
+        light
       />
       <MKBox
         minHeight="75vh"

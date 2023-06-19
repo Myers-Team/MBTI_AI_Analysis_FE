@@ -42,22 +42,22 @@ function Information() {
                 icon="touch_app"
                 title={
                   <>
-                    Feel the
+                    답변 통계
                     <br />
-                    Material Kit
+                    1번 질문
                   </>
                 }
-                description="All the MUI components that you need in a development have been re-design with the new look."
+                description="사용자의 답변에 대한 통계입니다. 같은 질문에 대해 답변의 통계량을 알려드립니다"
               />
               <RotatingCardBack
                 image={bgBack}
-                title="Discover More"
-                description="You will save a lot of time going from prototyping to full-functional code because all elements are implemented."
-                action={{
+                title="당신은 낙관적인 편인가 비관적인 편인가요?"
+                //description="You will save a lot of time going from prototyping to full-functional code because all elements are implemented." //주석처리로 인한 warning 무시
+                /*action={{
                   type: "internal",
                   route: "/sections/page-sections/page-headers",
                   label: "start with header",
-                }}
+                }}*/ //action주석 처리로 인한 warning 무시
               />
             </RotatingCard>
           </Grid>
@@ -65,33 +65,95 @@ function Information() {
             <Grid container spacing={3}>
               <Grid item xs={12} md={6}>
                 <DefaultInfoCard
-                  icon="content_copy"
-                  title="Full Documentation"
-                  description="Built by developers for developers. Check the foundation and you will find
-                    everything inside our documentation."
+                  icon="filter_1"
+                  title="낙관적인 거 같습니다"
+                  description="43%"
                 />
               </Grid>
               <Grid item xs={12} md={6}>
                 <DefaultInfoCard
-                  icon="flip_to_front"
-                  title="MUI Ready"
-                  description="The world's most popular react components library for building user interfaces."
+                  icon="filter_2"
+                  title="딱히 별 생각없습니다"
+                  description="35%"
                 />
               </Grid>
             </Grid>
             <Grid container spacing={3} sx={{ mt: { xs: 0, md: 6 } }}>
               <Grid item xs={12} md={6}>
                 <DefaultInfoCard
-                  icon="price_change"
-                  title="Save Time & Money"
-                  description="Creating your design from scratch with dedicated designers can be very expensive. Start with our Design System."
+                  icon="filter_3"
+                  title="낙관적일 때도 있고 비관적일 때도 있습니다"
+                  description="21%"
                 />
               </Grid>
               <Grid item xs={12} md={6}>
                 <DefaultInfoCard
-                  icon="devices"
-                  title="Fully Responsive"
-                  description="Regardless of the screen size, the website content will naturally fit the given resolution."
+                  icon="filter_4"
+                  title="잘 모르겠습니다"
+                  description="1%"
+                />
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+        <br/>
+        <Grid container item xs={11} spacing={3} alignItems="center" sx={{ mx: "auto" }}>
+          <Grid item xs={12} lg={4} sx={{ mx: "auto" }}>
+            <RotatingCard>
+              <RotatingCardFront
+                image={bgFront}
+                icon="touch_app"
+                title={
+                  <>
+                    이상형 답변 통계
+                    <br />
+                    1번 질문
+                  </>
+                }
+                description="이상형 MBTI의 답변에 대한 통계입니다. 같은 질문에 대해 답변의 통계량을 알려드립니다"
+              />
+              <RotatingCardBack
+                image={bgBack}
+                title="당신은 낙관적인 편인가 비관적인 편인가요?"
+                //description="You will save a lot of time going from prototyping to full-functional code because all elements are implemented." //주석처리로 인한 warning 무시
+                /*action={{
+                  type: "internal",
+                  route: "/sections/page-sections/page-headers",
+                  label: "start with header",
+                }}*/ //action주석 처리로 인한 warning 무시
+              />
+            </RotatingCard>
+          </Grid>
+          <Grid item xs={12} lg={7} sx={{ ml: "auto" }}>
+            <Grid container spacing={3}>
+              <Grid item xs={12} md={6}>
+                <DefaultInfoCard
+                  icon="filter_1"
+                  title="낙관적인 편입니다"
+                  description="67%"
+                />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <DefaultInfoCard
+                  icon="filter_2"
+                  title="낙관적일 때도 있고 비관적일 때도 있습니다"
+                  description="21%"
+                />
+              </Grid>
+            </Grid>
+            <Grid container spacing={3} sx={{ mt: { xs: 0, md: 6 } }}>
+              <Grid item xs={12} md={6}>
+                <DefaultInfoCard
+                  icon="filter_3"
+                  title="비관적인 편입니다"
+                  description="10%"
+                />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <DefaultInfoCard
+                  icon="filter_4"
+                  title="잘 모르겠습니다"
+                  description="2%"
                 />
               </Grid>
             </Grid>

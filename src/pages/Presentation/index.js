@@ -24,11 +24,14 @@ function Presentation() {
   const isAuthenticated = location.state?.isAuthenticated || false;
 
   const handleStart = () => {
+    navigate("/pages/landing-pages/contact-us");
+    /*
     if (isAuthenticated) {
       navigate("/pages/landing-pages/contact-us");
     } else {
       navigate("/pages/authentication/sign-in");
     }
+    */
   };
 
   const handleLogout = () => {
@@ -90,9 +93,14 @@ function Presentation() {
             <MKTypography variant="body1" color="white" opacity={0.8} mt={1} mb={3}>
               this is mbti test website
             </MKTypography>
+            <div style={{ display: "flex", gap: "10px" }}>
             <MKButton color="default" sx={{ color: ({ palette: { dark } }) => dark.main }} onClick={handleStart}>
               start
             </MKButton>
+            <MKButton color="dark" sx={{ color: ({ palette: { white } }) => white.main }} onClick={handleStart}>
+              ideal-start
+            </MKButton>
+            </div>
           </Grid>
         </Container>
       </MKBox>
